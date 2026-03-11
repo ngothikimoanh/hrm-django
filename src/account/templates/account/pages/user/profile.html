@@ -8,21 +8,21 @@
 
 {% block main %}
 <div class="container mt-5 border p-4 rounded bg-body-tertiary" style="max-width: 30rem;">
-  <h4>Personal Information</h4>
+  <h4 class="text-center mb-3">Personal Information</h4>
 
   <form method="post">
     {% csrf_token %}
 
     <label class="d-flex align-items-center justify-content-between p-3 border rounded mb-3" style="cursor:pointer;">
-      <div class="d-flex align-items-center gap-2">
-        <i class="fa-solid fa-camera"></i>
+      <div class="d-flex align-items-center">
+        <i class="fa-solid fa-camera me-3"></i>
         Profile Photo
       </div>
       <input type="file" class="d-none" name="avatar">
     </label>
 
     <div class="d-flex align-items-center p-3 border rounded mb-3" style="cursor:pointer;">
-      <i class="fa-regular fa-id-card me-3"></i>
+      <i class="fa-solid fa-id-card me-3"></i>
       <div>
         <a href="#" class="text-decoration-none text-reset">Full Name</a>
       </div>
@@ -42,6 +42,7 @@
       <div>
         <div>
           <a href="#" class="text-decoration-none text-reset">Email</a>
+          <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ user.email }}">
         </div>
       </div>
     </div>
