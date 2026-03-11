@@ -38,7 +38,7 @@ class User(AbstractUser, TimestampMixin, UUIDPrimaryMixin):
     phone_number = models.CharField(max_length=15, unique=True, null=True, blank=True)
     phone_number_verified = models.BooleanField(default=False)
 
-    gender = models.CharField(max_length=6, choices=Gender, null=True, blank=True)
+    gender = models.CharField(max_length=6, choices=Gender, null=True, blank=True, default=Gender.FEMALE)
 
     birthday = models.DateField(null=True, blank=True)
 
@@ -49,8 +49,6 @@ class User(AbstractUser, TimestampMixin, UUIDPrimaryMixin):
 
     # Remove some fields
     username = None
-    first_name = None
-    last_name = None
     date_joined = None
 
     objects = UserManager()
