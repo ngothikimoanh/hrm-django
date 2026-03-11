@@ -1,5 +1,17 @@
+{% extends "account/base.html" %}
+
+{% block title %}Home {% endblock title %}
+
+{% block nav %}
+{% include "account/nav.html" with path="account-home" %}
+{% endblock nav %}
+
+{% block main %}
+
 {% if user.is_authenticated %}
 Hello {{ user.email }}
 {% else %}
 Not login
 {% endif %}
+
+{% endblock main %}
