@@ -7,78 +7,90 @@
 {% endblock nav %}
 
 {% block main %}
-<div class="container mt-5 border p-4 rounded bg-body-tertiary" style="max-width: 30rem;">
+<div class="container mt-5 border p-4 rounded " style="max-width: 30rem;">
   <h4 class="text-center mb-3">Personal Information</h4>
 
   <form method="post">
     {% csrf_token %}
 
-    <label class="d-flex align-items-center justify-content-between p-3 border rounded mb-3" style="cursor:pointer;">
-      <div class="d-flex align-items-center">
-        <i class="fa-solid fa-camera me-3"></i>
-        Profile Photo
-      </div>
-      <input type="file" class="d-none" name="avatar">
-    </label>
+    <ul class="list-group fw-bold">
 
-    <div class="d-flex align-items-center p-3 border rounded mb-3" style="cursor:pointer;">
-      <i class="fa-solid fa-id-card me-3"></i>
-      <div>
-        <a href="{% url 'account-user-profile-edit-name' %}" class="text-decoration-none text-reset">Name</a>
-        <input type="text" readonly class="form-control-plaintext" id="username" value="{{ user.first_name }} {{ user.last_name }}">
-      </div>
-    </div>
+      <li class="list-group-item mb-3">
+        <label class="d-flex align-items-center justify-content-between w-100">
+          <div class="d-flex align-items-center">
+            <i class="fa-solid fa-camera me-3"></i>
+            Profile Photo
+          </div>
+          <input type="file" class="d-none" name="avatar">
+        </label>
+      </li>
 
-    <div class="d-flex align-items-center p-3 border rounded mb-3" style="cursor:pointer;">
-      <i class="fa-solid fa-user me-3"></i>
-      <div>
-        <div>
-          <a href="{% url 'account-user-profile-edit-gender' %}" class="text-decoration-none text-reset">Gender</a>
-          <input type="text" readonly class="form-control-plaintext" id="gender" value="{{ user.gender }} ">
+      <li class="list-group-item list-group-item-action mb-3">
+        <div class="d-flex align-items-center">
+          <i class="fa-solid fa-id-card me-3"></i>
+          <div class="w-100">
+            <a href="{% url 'account-user-profile-edit-name' %}" class="text-decoration-none text-reset">Name</a>
+            <input type="text" readonly class="form-control-plaintext p-0" value="{{ user.first_name }} {{ user.last_name }}">
+          </div>
         </div>
-      </div>
-    </div>
+      </li>
 
-    <div class="d-flex align-items-center p-3 border rounded mb-3" style="cursor:pointer;">
-      <i class="fa-solid fa-envelope me-3"></i>
-      <div>
-        <div>
-          <a href="#" class="text-decoration-none text-reset">Email</a>
-          <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ user.email }}">
+      <li class="list-group-item list-group-item-action mb-3">
+        <div class="d-flex align-items-center">
+          <i class="fa-solid fa-user me-3"></i>
+          <div class="w-100">
+            <a href="{% url 'account-user-profile-edit-gender' %}" class="text-decoration-none text-reset">Gender</a>
+            <input type="text" readonly class="form-control-plaintext p-0" value="{{ user.gender }}">
+          </div>
         </div>
-      </div>
-    </div>
+      </li>
 
-    <div class="d-flex align-items-center p-3 border rounded mb-3" style="cursor:pointer;">
-      <i class="fa-solid fa-phone me-3"></i>
-      <div>
-        <div>
-          <a href="{% url 'account-user-profile-edit-phone_number' %}" class="text-decoration-none text-reset">Phone Number</a>
+      <li class="list-group-item list-group-item-action mb-3">
+        <div class="d-flex align-items-center">
+          <i class="fa-solid fa-envelope me-3"></i>
+          <div class="w-100">
+            <a href="#" class="text-decoration-none text-reset">Email</a>
+            <input type="text" readonly class="form-control-plaintext p-0" value="{{user.email}}">
+          </div>
         </div>
-      </div>
-    </div>
+      </li>
 
-
-    <div class="d-flex align-items-center p-3 border rounded mb-3" style="cursor:pointer;">
-      <i class="fa-solid fa-cake-candles me-3"></i>
-      <div>
-        <div>
-          <a href="#" class="text-decoration-none text-reset">Birthday</a>
+      <li class="list-group-item list-group-item-action mb-3">
+        <div class="d-flex align-items-center">
+          <i class="fa-solid fa-phone me-3"></i>
+          <div>
+            <a href="{% url 'account-user-profile-edit-phone_number' %}" class="text-decoration-none text-reset">
+              Phone Number
+            </a>
+          </div>
         </div>
-      </div>
-    </div>
+      </li>
 
-
-
-    <div class="d-flex align-items-center p-3 border rounded mb-3" style="cursor:pointer;">
-      <i class="fa-solid fa-house me-3"></i>
-      <div>
-        <div>
-          <a href="#" class="text-decoration-none text-reset">Address</a>
+      <li class="list-group-item list-group-item-action mb-3">
+        <div class="d-flex align-items-center">
+          <i class="fa-solid fa-cake-candles me-3"></i>
+          <div>
+            <a href="#" class="text-decoration-none text-reset">Birthday</a>
+          </div>
         </div>
-      </div>
-    </div>
+      </li>
+
+      <li class="list-group-item list-group-item-action mb-3">
+        <div class="d-flex align-items-center">
+          <i class="fa-solid fa-house me-3"></i>
+          <div>
+            <a href="#" class="text-decoration-none text-reset">Address</a>
+          </div>
+        </div>
+      </li>
+
+    </ul>
 
   </form>
 </div>
 {% endblock main %}
+<style>
+  .list-group-item {
+    cursor: pointer,
+  }
+</style>
