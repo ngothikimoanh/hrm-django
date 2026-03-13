@@ -12,12 +12,12 @@
     {% csrf_token %}
     <div class="mb-3">
       <label for="userRegisterInputEmail" class="form-label ">Email address</label>
-      <input type="email" class="form-control" id="userRegisterInputEmail" name="email" value="{{ form.email.value }}" required>
+      <input type="email" class="form-control" id="userRegisterInputEmail" name="email" value="{{ form.email.value|default_if_none:"" }}" required>
       {% include "error-field.html" with form=form name="email" %}
     </div>
     <div class="mb-4">
       <label for="userRegisterInputPassword" class="form-label">Password</label>
-      <input type="password" class="form-control" id="userRegisterInputPassword" name="password" value="{{ form.password.value }}" required>
+      <input type="password" class="form-control" id="userRegisterInputPassword" name="password" value="{{ form.password.value|default_if_none:"" }}" required>
       {% include "error-field.html" with form=form name="password" %}
     </div>
     <button type="submit" class=" form-control btn btn-primary">Register</button>
