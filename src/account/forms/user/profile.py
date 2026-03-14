@@ -4,8 +4,6 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.forms import ValidationError
 
-from account.validators.user import validate_address
-
 User = get_user_model()
 
 
@@ -58,12 +56,6 @@ class EditBirthdayForm(forms.ModelForm):
 
 
 class EditAddressForm(forms.ModelForm):
-    address = forms.CharField(max_length=255, validators=[validate_address])
-
     class Meta:
         model = User
         fields = ["address"]
-
-    def clean_address(self):
-        address = self.cleaned_data["address"].strip()
-        return address

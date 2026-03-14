@@ -1,5 +1,9 @@
 {% extends "account/base.html" %}
 
+{% load display %}
+
+{% load static %}
+
 {% block title %}Profile{% endblock title %}
 
 {% block nav %}
@@ -10,82 +14,75 @@
 <div class="container mt-5 p-4  rounded " style="max-width: 42rem;">
   <h4 class="text-center mb-4">Personal Information</h4>
 
-  <form method="post">
-    {% csrf_token %}
-
-    <ul class="list-group">
-      <li class="list-group-item py-4">
-        <label class="d-flex align-items-center justify-content-between flex-grow-1">
-          <div class="d-flex align-items-center">
-            <i class="fa-solid fa-camera me-3"></i>
-            <strong>Profile Photo</strong>
-          </div>
+  <ul class="list-group">
+    <li class="list-group-item py-4">
+      <label class="d-flex align-items-center justify-content-between ">
+        <div class="d-flex align-items-center p-2 w-100">
+          <i class="fa-solid fa-camera me-3"></i>
+          <strong>Profile Photo</strong>
+        </div>
+        <div class="p-2 flex-shrink-1"><img src="{% static 'images/default_avartar.png' %}" alt="default_avatar" class="rounded-circle object-fit-cover" style="width:4rem; height:4rem;"></div>
+        <form method="post">
           <input type="file" class="d-none" name="avatar">
-        </label>
-      </li>
+        </form>
+      </label>
+    </li>
 
-      <li class="list-group-item list-group-item-action text-body text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-name' %}`">
-        <div class="d-flex align-items-center">
-          <div>
-            <i class="fa-solid fa-id-card me-3"></i>
-          </div>
-          <div class="flex-grow-1">
-            <h6>Name</h6>
-            <input type="text" readonly class="form-control-plaintext p-0" value="{{user.first_name}} {{user.last_name}}">
-          </div>
+    <li class="list-group-item list-group-item-action text-body text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-name' %}`">
+      <div class="d-flex align-items-center">
+        <div>
+          <i class="fa-solid fa-id-card me-3"></i>
         </div>
-      </li>
+        <div class="flex-grow-1">
+          <h6>Name</h6>
+          <div> {{ user.first_name|display}} {{ user.last_name|display }}</div>
+        </div>
+    </li>
 
-      <li class="list-group-item list-group-item-action text-body text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-gender' %}`">
-        <div class="d-flex align-items-center">
-          <div><i class="fa-solid fa-user me-3"></i></div>
-          <div class="flex-grow-1">
-            <h6>Gender</h6>
-            <input type="text" readonly class="form-control-plaintext p-0" value="{{user.gender}}">
-          </div>
+    <li class="list-group-item list-group-item-action text-body text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-gender' %}`">
+      <div class="d-flex align-items-center">
+        <div><i class="fa-solid fa-user me-3"></i></div>
+        <div class="flex-grow-1">
+          <h6>Gender</h6>
+          <div>{{ user.gender|display }}</div>
         </div>
-      </li>
+    </li>
 
-      <li class="list-group-item list-group-item-action text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-email' %}`">
-        <div class="d-flex align-items-center">
-          <div><i class="fa-solid fa-envelope me-3"></i></div>
-          <div class="flex-grow-1">
-            <h6>Email Address</h6>
-            <input type="text" readonly class="form-control-plaintext p-0" value="{{user.email}}">
-          </div>
+    <li class="list-group-item list-group-item-action text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-email' %}`">
+      <div class="d-flex align-items-center">
+        <div><i class="fa-solid fa-envelope me-3"></i></div>
+        <div class="flex-grow-1">
+          <h6>Email Address</h6>
+          <div>{{ user.email|display }}</div>
         </div>
-      </li>
+    </li>
 
-      <li class="list-group-item list-group-item-action text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-phone_number' %}`">
-        <div class="d-flex align-items-center">
-          <div><i class="fa-solid fa-phone me-3"></i></div>
-          <div>
-            <h6>Phone Number</h6>
-            <input type="text" readonly class="form-control-plaintext p-0" value="{{user.phone_number}}">
-          </div>
+    <li class="list-group-item list-group-item-action text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-phone_number' %}`">
+      <div class="d-flex align-items-center">
+        <div><i class="fa-solid fa-phone me-3"></i></div>
+        <div>
+          <h6>Phone Number</h6>
+          <div>{{ user.phone_number|display}}</div>
         </div>
-      </li>
+    </li>
 
-      <li class="list-group-item list-group-item-action text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-birthday' %}`">
-        <div class="d-flex align-items-center">
-          <div><i class="fa-solid fa-cake-candles me-3"></i></div>
-          <div>
-            <h6>Birthday</h6>
-            <input type="text" readonly class="form-control-plaintext p-0" value="{{user.birthday|date:'Y-m-d'}}"></input>
-          </div>
+    <li class="list-group-item list-group-item-action text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-birthday' %}`">
+      <div class="d-flex align-items-center">
+        <div><i class="fa-solid fa-cake-candles me-3"></i></div>
+        <div>
+          <h6>Birthday</h6>
+          <div> {{ user.birthday|display }}</div>
         </div>
-      </li>
+    </li>
 
-      <li class="list-group-item list-group-item-action text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-address' %}`">
-        <div class="d-flex align-items-center">
-          <div><i class="fa-solid fa-house me-3"></i></div>
-          <div>
-            <h6>Address</h6>
-            <input type="text" readonly class="form-control-plaintext p-0" value="{{user.address}}">
-          </div>
+    <li class="list-group-item list-group-item-action text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-address' %}`">
+      <div class="d-flex align-items-center">
+        <div><i class="fa-solid fa-house me-3"></i></div>
+        <div>
+          <h6>Address</h6>
+          <div>{{ user.address|display }}</div>
         </div>
-      </li>
-    </ul>
-  </form>
+    </li>
+  </ul>
 </div>
 {% endblock main %}

@@ -1,6 +1,6 @@
 {% extends "account/base.html" %}
 
-{% block title %}Profile{% endblock title %}
+{% block title %}Edit Profile{% endblock title %}
 
 {% block nav %}
 {% include "account/nav.html" with path="account-user-profile" %}
@@ -10,29 +10,31 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-4">
-
       <div class="card shadow-sm">
         <div class="card-body">
-
           <h5 class="text-center mb-4">Phone Number</h5>
-
           <form method="post">
             {% csrf_token %}
 
             <div class="input-group mb-3">
-              <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">National</button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Coming Soon</a></li>
-              </ul>
-              <input type="tel" class="form-control" name="phone_number" value="{{user.phone_number}}">
-              <button class="btn btn-outline-secondary" type="button" id="verify_phone_number">Verify phone number</button>
+              <select class="form-select" style="max-width: 5rem;">
+                <option selected>+84</option>
+              </select>
+              <input type="tel" class="form-control" name="phone_number" value="{{user.phone_number}}" required>
               {% include "error-field.html" with form=form name="phone_number" %}
-
+            </div>
+            <div class="mb-3 text-end">
+              <small>
+                {% if phone_number_verified is True %}
+                Phone number is verified
+                {% else %}
+                <a href="#" class="text-decoration-none">Click here to verify phone number</a>
+                {% endif %}
+              </small>
             </div>
             <button type="submit" class=" form-control btn btn-primary">Save</button>
           </form>
         </div>
-
       </div>
     </div>
   </div>

@@ -3,6 +3,7 @@ from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
 from account.forms.user.profile import (
+    EditAddressForm,
     EditBirthdayForm,
     EditEmailForm,
     EditGenderForm,
@@ -38,7 +39,12 @@ def edit_phone_number_view(request: HttpRequest):
     if request.method == "POST" and form.is_valid():
         form.save()
         return redirect("account-user-profile")
-    return render(request, "account/pages/user/profile/edit_phone_number.html", {"form": form})
+
+    context = {
+        "form": form,
+        "phone_number_verified": user.phone_number_verified,
+    }
+    return render(request, "account/pages/user/profile/edit_phone_number.html", context)
 
 
 def edit_email_view(request: HttpRequest):
@@ -47,7 +53,12 @@ def edit_email_view(request: HttpRequest):
     if request.method == "POST" and form.is_valid():
         form.save()
         return redirect("account-user-profile")
-    return render(request, "account/pages/user/profile/edit_email.html", {"form": form})
+    context = {
+        "form": form,
+        "email_verified": user.email_verified,
+    }
+
+    return render(request, "account/pages/user/profile/edit_email.html", context)
 
 
 def edit_birthday_view(request: HttpRequest):
@@ -61,8 +72,8 @@ def edit_birthday_view(request: HttpRequest):
 
 def edit_address_view(request: HttpRequest):
     user = request.user
-    form = EditBirthdayForm(request.POST or None, instance=user)
+    form = EditAddressForm(request.POST or None, instance=user)
     if request.method == "POST" and form.is_valid():
         form.save()
         return redirect("account-user-profile")
-    return render(request, "account/pages/user/profile/edit_birthday.html", {"form": form})
+    return render(request, "account/pages/user/profile/edit_address.html", {"form": form})
