@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 
@@ -12,18 +13,9 @@
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
 
-  <style>
-    .bg-body-tertiary {
-      --bs-bg-opacity: 1;
-      background-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity)) !important;
-    }
 
-    .bg-body {
-      --bs-bg-opacity: 1;
-      background-color: rgba(var(--bs-tertiary-bg-rgb), var(--bs-bg-opacity)) !important;
-    }
-  </style>
 </head>
 
 <body class="bg-body">

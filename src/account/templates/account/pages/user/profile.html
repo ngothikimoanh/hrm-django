@@ -7,90 +7,85 @@
 {% endblock nav %}
 
 {% block main %}
-<div class="container mt-5 border p-4 rounded " style="max-width: 30rem;">
-  <h4 class="text-center mb-3">Personal Information</h4>
+<div class="container mt-5 p-4  rounded " style="max-width: 42rem;">
+  <h4 class="text-center mb-4">Personal Information</h4>
 
   <form method="post">
     {% csrf_token %}
 
-    <ul class="list-group fw-bold">
-
-      <li class="list-group-item mb-3">
-        <label class="d-flex align-items-center justify-content-between w-100">
+    <ul class="list-group">
+      <li class="list-group-item py-4">
+        <label class="d-flex align-items-center justify-content-between flex-grow-1">
           <div class="d-flex align-items-center">
             <i class="fa-solid fa-camera me-3"></i>
-            Profile Photo
+            <strong>Profile Photo</strong>
           </div>
           <input type="file" class="d-none" name="avatar">
         </label>
       </li>
 
-      <li class="list-group-item list-group-item-action mb-3">
+      <li class="list-group-item list-group-item-action text-body text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-name' %}`">
         <div class="d-flex align-items-center">
-          <i class="fa-solid fa-id-card me-3"></i>
-          <div class="w-100">
-            <a href="{% url 'account-user-profile-edit-name' %}" class="text-decoration-none text-reset">Name</a>
-            <input type="text" readonly class="form-control-plaintext p-0" value="{{ user.first_name }} {{ user.last_name }}">
+          <div>
+            <i class="fa-solid fa-id-card me-3"></i>
+          </div>
+          <div class="flex-grow-1">
+            <h6>Name</h6>
+            <input type="text" readonly class="form-control-plaintext p-0" value="{{user.first_name}} {{user.last_name}}">
           </div>
         </div>
       </li>
 
-      <li class="list-group-item list-group-item-action mb-3">
+      <li class="list-group-item list-group-item-action text-body text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-gender' %}`">
         <div class="d-flex align-items-center">
-          <i class="fa-solid fa-user me-3"></i>
-          <div class="w-100">
-            <a href="{% url 'account-user-profile-edit-gender' %}" class="text-decoration-none text-reset">Gender</a>
-            <input type="text" readonly class="form-control-plaintext p-0" value="{{ user.gender }}">
+          <div><i class="fa-solid fa-user me-3"></i></div>
+          <div class="flex-grow-1">
+            <h6>Gender</h6>
+            <input type="text" readonly class="form-control-plaintext p-0" value="{{user.gender}}">
           </div>
         </div>
       </li>
 
-      <li class="list-group-item list-group-item-action mb-3">
+      <li class="list-group-item list-group-item-action text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-email' %}`">
         <div class="d-flex align-items-center">
-          <i class="fa-solid fa-envelope me-3"></i>
-          <div class="w-100">
-            <a href="#" class="text-decoration-none text-reset">Email</a>
+          <div><i class="fa-solid fa-envelope me-3"></i></div>
+          <div class="flex-grow-1">
+            <h6>Email Address</h6>
             <input type="text" readonly class="form-control-plaintext p-0" value="{{user.email}}">
           </div>
         </div>
       </li>
 
-      <li class="list-group-item list-group-item-action mb-3">
+      <li class="list-group-item list-group-item-action text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-phone_number' %}`">
         <div class="d-flex align-items-center">
-          <i class="fa-solid fa-phone me-3"></i>
+          <div><i class="fa-solid fa-phone me-3"></i></div>
           <div>
-            <a href="{% url 'account-user-profile-edit-phone_number' %}" class="text-decoration-none text-reset">
-              Phone Number
-            </a>
+            <h6>Phone Number</h6>
+            <input type="text" readonly class="form-control-plaintext p-0" value="{{user.phone_number}}">
           </div>
         </div>
       </li>
 
-      <li class="list-group-item list-group-item-action mb-3">
+      <li class="list-group-item list-group-item-action text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-birthday' %}`">
         <div class="d-flex align-items-center">
-          <i class="fa-solid fa-cake-candles me-3"></i>
+          <div><i class="fa-solid fa-cake-candles me-3"></i></div>
           <div>
-            <a href="#" class="text-decoration-none text-reset">Birthday</a>
+            <h6>Birthday</h6>
+            <input type="text" readonly class="form-control-plaintext p-0" value="{{user.birthday|date:'Y-m-d'}}"></input>
           </div>
         </div>
       </li>
 
-      <li class="list-group-item list-group-item-action mb-3">
+      <li class="list-group-item list-group-item-action text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-address' %}`">
         <div class="d-flex align-items-center">
-          <i class="fa-solid fa-house me-3"></i>
+          <div><i class="fa-solid fa-house me-3"></i></div>
           <div>
-            <a href="#" class="text-decoration-none text-reset">Address</a>
+            <h6>Address</h6>
+            <input type="text" readonly class="form-control-plaintext p-0" value="{{user.address}}">
           </div>
         </div>
       </li>
-
     </ul>
-
   </form>
 </div>
 {% endblock main %}
-<style>
-  .list-group-item {
-    cursor: pointer,
-  }
-</style>

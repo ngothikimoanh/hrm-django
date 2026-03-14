@@ -2,7 +2,13 @@ from django.contrib.auth import get_user_model
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
-from account.forms.user.profile import EditProfileGenderForm, EditProfileNameForm
+from account.forms.user.profile import (
+    EditBirthdayForm,
+    EditEmailForm,
+    EditGenderForm,
+    EditNameForm,
+    EditPhoneNumberForm,
+)
 
 User = get_user_model()
 
@@ -10,9 +16,8 @@ User = get_user_model()
 def edit_name_view(request: HttpRequest):
     # lấy user đang login
     user = request.user
-    form = EditProfileNameForm(request.POST or None, instance=user)
+    form = EditNameForm(request.POST or None, instance=user)
     if request.method == "POST" and form.is_valid():
-        print(form.is_valid())
         form.save()
         return redirect("account-user-profile")
     return render(request, "account/pages/user/profile/edit_name.html", {"form": form})
@@ -20,9 +25,8 @@ def edit_name_view(request: HttpRequest):
 
 def edit_gender_view(request: HttpRequest):
     user = request.user
-    form = EditProfileGenderForm(request.POST or None, instance=user)
+    form = EditGenderForm(request.POST or None, instance=user)
     if request.method == "POST" and form.is_valid():
-        print(form.is_valid())
         form.save()
         return redirect("account-user-profile")
     return render(request, "account/pages/user/profile/edit_gender.html", {"form": form})
@@ -30,9 +34,35 @@ def edit_gender_view(request: HttpRequest):
 
 def edit_phone_number_view(request: HttpRequest):
     user = request.user
-    form = EditProfileGenderForm(request.POST or None, instance=user)
+    form = EditPhoneNumberForm(request.POST or None, instance=user)
     if request.method == "POST" and form.is_valid():
-        print(form.is_valid())
         form.save()
         return redirect("account-user-profile")
     return render(request, "account/pages/user/profile/edit_phone_number.html", {"form": form})
+
+
+def edit_email_view(request: HttpRequest):
+    user = request.user
+    form = EditEmailForm(request.POST or None, instance=user)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect("account-user-profile")
+    return render(request, "account/pages/user/profile/edit_email.html", {"form": form})
+
+
+def edit_birthday_view(request: HttpRequest):
+    user = request.user
+    form = EditBirthdayForm(request.POST or None, instance=user)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect("account-user-profile")
+    return render(request, "account/pages/user/profile/edit_birthday.html", {"form": form})
+
+
+def edit_address_view(request: HttpRequest):
+    user = request.user
+    form = EditBirthdayForm(request.POST or None, instance=user)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect("account-user-profile")
+    return render(request, "account/pages/user/profile/edit_birthday.html", {"form": form})

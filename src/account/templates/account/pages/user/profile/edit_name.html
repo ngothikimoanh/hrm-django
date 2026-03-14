@@ -13,12 +13,12 @@
     {% csrf_token %}
     <div class="mb-3">
       <label for="editLastname" class="form-label ">Last Name</label>
-      <input type="text" class="form-control" id="editLastname" name="first_name" value="{{ user.first_name }}" required>
+      <input type="text" class="form-control" id="editLastname" name="first_name" value="{{user.first_name}}" required>
     </div>
 
     <div class="mb-3">
       <label for="editFirstname" class="form-label ">First Name</label>
-      <input type="text" class="form-control" id="editFirstname" name="last_name" value="{{ user.last_name }}" required>
+      <input type="text" class="form-control" id="editFirstname" name="last_name" value="{{user.last_name}}" required>
     </div>
 
     <div class="mb-3">
