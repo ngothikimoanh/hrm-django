@@ -7,10 +7,12 @@ User = get_user_model()
 class EditNameForm(forms.ModelForm):
     first_name = forms.CharField()
     last_name = forms.CharField()
+    mid_name = forms.CharField()
+    nick_name = forms.CharField()
 
     class Meta:
         model = User
-        fields = ["first_name", "last_name"]
+        fields = ["first_name", "last_name", "mid_name", "nick_name"]
 
 
 class EditGenderForm(forms.ModelForm):

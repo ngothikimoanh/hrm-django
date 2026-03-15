@@ -46,6 +46,9 @@ class User(AbstractUser, TimestampMixin, UUIDPrimaryMixin):
 
     address = models.CharField(max_length=255, validators=[validate_address], blank=True, null=True)
 
+    mid_name = models.CharField(max_length=150, blank=True, null=True)
+    nick_name = models.CharField(max_length=150, blank=True, null=True)
+
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
