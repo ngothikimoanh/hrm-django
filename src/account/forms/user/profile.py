@@ -1,8 +1,5 @@
-from datetime import date
-
 from django import forms
 from django.contrib.auth import get_user_model
-from django.forms import ValidationError
 
 User = get_user_model()
 
@@ -45,13 +42,7 @@ class EditBirthdayForm(forms.ModelForm):
 
     def clean_birthday(self):
 
-        birthday = self.cleaned_data.get("birthday")
-        if birthday:
-            today = date.today()
-            age = today.year - birthday.year - ((today.month, today.day) < (birthday.month, birthday.day))
-
-            if age < 18:
-                raise ValidationError("You must be at least 18 years old to use this service.")
+        birthday = self.cleaned_data["birthday"]
         return birthday
 
 
