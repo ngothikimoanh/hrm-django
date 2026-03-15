@@ -40,7 +40,7 @@ class User(AbstractUser, TimestampMixin, UUIDPrimaryMixin):
     phone_number = PhoneNumberField(unique=True, null=True, blank=True)
     phone_number_verified = models.BooleanField(default=False)
 
-    gender = models.CharField(max_length=6, choices=Gender, null=True, blank=True, default=Gender.FEMALE)
+    gender = models.CharField(max_length=6, choices=Gender, null=True, default=Gender.FEMALE)
 
     birthday = models.DateField(null=True, blank=True)
 

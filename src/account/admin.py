@@ -9,7 +9,18 @@ from account.models.user import User
 
 @admin.register(User)
 class AdminManager(admin.ModelAdmin):
-    list_display = ["email", "email_verified", "phone_number", "phone_number_verified", "gender", "birthday", "address"]
+    list_display = [
+        "email",
+        "email_verified",
+        "phone_number",
+        "phone_number_verified",
+        "gender",
+        "birthday",
+        "address",
+        "nick_name",
+    ]
+    search_fields = ["email", "phone_number", "address", "nick_name"]
+    list_filter = ["gender"]
 
     @override
     def get_queryset(self, request: HttpRequest) -> QuerySet:

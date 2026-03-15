@@ -17,8 +17,15 @@
     </div>
     <div class="mb-4">
       <label for="userRegisterInputPassword" class="form-label">Password</label>
-      <input type="password" class="form-control" id="userRegisterInputPassword" name="password" value="{{ form.password.value|default_if_none:"" }}" required>
-      {% include "error-field.html" with form=form name="password" %}
+      <input type="password" class="form-control" id="userRegisterInputPassword" name="password" required>
+      <div class=" text-danger small">{{ form.password.errors }}</div>
+    </div>
+    <div class="mb-4">
+      <label for="userRegisterConfirmPassword" class="form-label">Confirm Password</label>
+      <input type="password" class="form-control" id="userRegisterConfirmPassword" name="confirm_password" required>
+    </div>
+    <div class="text-danger small">
+      {{ form.confirm_password.errors }}
     </div>
     <button type="submit" class=" form-control btn btn-primary">Register</button>
   </form>

@@ -20,7 +20,7 @@
             {% csrf_token %}
 
             <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="address" name="address" value="{{user.address}}">
+              <input type="text" class="form-control" id="address" name="address" value="{{user.address|default_if_none:''}}">
               {% include "error-field.html" with form=form name="address" %}
               <label for="address"> Address</label>
             </div>

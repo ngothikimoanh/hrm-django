@@ -21,6 +21,7 @@
       {% include "error-field.html" with form=form name="password" %}
     </div>
     <button type="submit" class=" form-control btn btn-primary">Login</button>
+    <div class="mt-3 text-end"><small><a class="text-decoration-none" href="{% url 'account-user-register' %}">Don't have an account?</a></small></div>
   </form>
 </div>
 {% endblock main %}

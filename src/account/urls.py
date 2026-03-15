@@ -1,3 +1,4 @@
+from django.contrib.auth.views import LogoutView
 from django.urls import path
 
 from account.views.home import home_view
@@ -18,6 +19,7 @@ urlpatterns = [
     # Users
     path("users/register", user_register, name="account-user-register"),
     path("users/login", user_login, name="account-user-login"),
+    path("users/logout", LogoutView.as_view(next_page="account-home"), name="account-user-logout"),
     path("users/profile", profile_view, name="account-user-profile"),
     # Edit profile
     path("users/profile/edit_name", edit_name_view, name="account-user-profile-edit-name"),

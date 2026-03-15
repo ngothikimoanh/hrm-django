@@ -20,7 +20,7 @@
               <select class="form-select" style="max-width: 5rem;">
                 <option selected>+84</option>
               </select>
-              <input type="tel" class="form-control" name="phone_number" value="{{user.phone_number}}" required>
+              <input type="tel" class="form-control" name="phone_number" value="{{user.phone_number|default_if_none:''}}" required>
               {% include "error-field.html" with form=form name="phone_number" %}
             </div>
             <div class="mb-3 text-end">
