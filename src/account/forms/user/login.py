@@ -7,7 +7,8 @@ User = get_user_model()
 
 class UserLoginForm(forms.Form):
     email = forms.EmailField()
-    password = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
+
     user: User | None = None
 
     def clean_email(self):

@@ -2,6 +2,7 @@ from django.contrib.auth.views import LogoutView
 from django.urls import path
 
 from account.views.home import home_view
+from account.views.user.change_password_view import change_password_view
 from account.views.user.edit_profile import (
     edit_address_view,
     edit_birthday_view,
@@ -21,6 +22,7 @@ urlpatterns = [
     path("users/login", user_login, name="account-user-login"),
     path("users/logout", LogoutView.as_view(next_page="account-home"), name="account-user-logout"),
     path("users/profile", profile_view, name="account-user-profile"),
+    path("users/change_password", change_password_view, name="account-user-change_password"),
     # Edit profile
     path("users/profile/edit_name", edit_name_view, name="account-user-profile-edit-name"),
     path("users/profile/edit_gender", edit_gender_view, name="account-user-profile-edit-gender"),
