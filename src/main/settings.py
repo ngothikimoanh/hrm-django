@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+
+import environ
 
 from main.constants.database import SQLITE_PATH
 
@@ -122,3 +125,15 @@ STATIC_URL = "static/"
 
 # Authentication
 AUTH_USER_MODEL = "account.User"
+
+
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = env("AWS_SES_HOST")
+EMAIL_PORT = env.int("AWS_SES_PORT")
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = env("AWS_SES_USER")
+EMAIL_HOST_PASSWORD = env("AWS_SES_PASSWORD")
+DEFAULT_FROM_EMAIL = env("AWS_SES_FROM")

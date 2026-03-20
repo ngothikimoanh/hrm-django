@@ -17,7 +17,7 @@ class UserRegisterForm(forms.ModelForm):
         fields = ["email", "password"]
 
     def clean_password(self):
-        password = self.cleaned_data.get("password")
+        password = self.cleaned_data["password"]
         validate_password(password)
         return password
 
