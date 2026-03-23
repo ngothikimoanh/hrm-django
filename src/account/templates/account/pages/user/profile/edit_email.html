@@ -7,37 +7,28 @@
 {% endblock nav %}
 
 {% block main %}
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-4">
+<div class="container mt-5 shadow-sm border rounded p-4 bg-body-tertiary" style="max-width: 35rem;">
+  <h4 class="text-center mb-4">Update your email</h4>
+  <form method="post">
+    {% csrf_token %}
 
-      <div class="card shadow-sm">
-        <div class="card-body">
-
-          <h5 class="text-center mb-4 p-3">Email</h5>
-
-          <form method="post">
-            {% csrf_token %}
-            <h6>Email Address</h6>
-
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" name="email" placeholder="example@gmail.com" value="{{user.email}}">
-              {% include "error-field.html" with form=form name="email" %}
-            </div>
-            <div class="mb-3 text-end">
-              <small>
-                {% if email_verified is True %}
-                Email is verified
-                {% else %}
-                <a href="#" class="text-decoration-none">Click here to verify Email</a>
-                {% endif %}
-              </small>
-            </div>
-            <button type="submit" class=" form-control btn btn-primary">Save</button>
-          </form>
-        </div>
-      </div>
+    <div class="form-floating mb-4">
+      <input type="text" class="form-control" name="email" placeholder="example@gmail.com" id="email" value="{{ user.email }}">
+      {% include "error-field.html" with form=form name="email" %}
+      <label for="email">Email</label>
     </div>
-  </div>
+
+    <div class="mb-3 text-end">
+      <small>
+        {% if email_verified is True %}
+        Email is verified
+        {% else %}
+        <a href="#" class="text-decoration-none">Click here to verify Email</a>
+        {% endif %}
+      </small>
+    </div>
+
+    <button type="submit" class="form-control btn btn-primary">Save</button>
+  </form>
 </div>
 {% endblock main %}

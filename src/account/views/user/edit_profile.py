@@ -17,9 +17,7 @@ User = get_user_model()
 
 
 def edit_name_view(request: HttpRequest):
-    # lấy user đang login
-    user = request.user
-    form = EditNameForm(request.POST or None, instance=user)
+    form = EditNameForm(request.POST or None, instance=request.user)
     if request.method == HTTPMethod.POST and form.is_valid():
         form.save()
         return redirect("account-user-profile")
@@ -27,8 +25,7 @@ def edit_name_view(request: HttpRequest):
 
 
 def edit_gender_view(request: HttpRequest):
-    user = request.user
-    form = EditGenderForm(request.POST or None, instance=user)
+    form = EditGenderForm(request.POST or None, instance=request.user)
     if request.method == HTTPMethod.POST and form.is_valid():
         form.save()
         return redirect("account-user-profile")
@@ -36,8 +33,7 @@ def edit_gender_view(request: HttpRequest):
 
 
 def edit_phone_number_view(request: HttpRequest):
-    user = request.user
-    form = EditPhoneNumberForm(request.POST or None, instance=user)
+    form = EditPhoneNumberForm(request.POST or None, instance=request.user)
     if request.method == HTTPMethod.POST and form.is_valid():
         form.save()
         return redirect("account-user-profile")
@@ -50,8 +46,7 @@ def edit_phone_number_view(request: HttpRequest):
 
 
 def edit_email_view(request: HttpRequest):
-    user = request.user
-    form = EditEmailForm(request.POST or None, instance=user)
+    form = EditEmailForm(request.POST or None, instance=request.user)
     if request.method == HTTPMethod.POST and form.is_valid():
         form.save()
         return redirect("account-user-profile")
@@ -64,8 +59,7 @@ def edit_email_view(request: HttpRequest):
 
 
 def edit_birthday_view(request: HttpRequest):
-    user = request.user
-    form = EditBirthdayForm(request.POST or None, instance=user)
+    form = EditBirthdayForm(request.POST or None, instance=request.user)
     if request.method == HTTPMethod.POST and form.is_valid():
         form.save()
         return redirect("account-user-profile")
@@ -73,8 +67,7 @@ def edit_birthday_view(request: HttpRequest):
 
 
 def edit_address_view(request: HttpRequest):
-    user = request.user
-    form = EditAddressForm(request.POST or None, instance=user)
+    form = EditAddressForm(request.POST or None, instance=request.user)
     if request.method == HTTPMethod.POST and form.is_valid():
         form.save()
         return redirect("account-user-profile")

@@ -17,6 +17,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 from main.constants.database import SQLITE_PATH
+from main.constants.environment import ENV_FILE
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 logger = logging.getLogger(__name__)
 
 # Load environment variables
-DEFAULT_ENV_FILE = BASE_DIR / ".env"
+DEFAULT_ENV_FILE = BASE_DIR / ENV_FILE
 
 if not load_dotenv(DEFAULT_ENV_FILE):
     logger.warning(".env file not found, skipping...")
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "common",
     "account",
+    "mail",
 ]
 
 MIDDLEWARE = [
