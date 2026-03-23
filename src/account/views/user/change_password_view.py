@@ -1,6 +1,5 @@
 from http import HTTPMethod
 
-from django.contrib.auth import logout
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
@@ -17,10 +16,8 @@ def change_password_view(request: HttpRequest):
     if request.method == HTTPMethod.POST and form.is_valid():
         user = form.save()
 
-        send_email_service = ChangePasswordEmail()
-        send_email_service.send(user)
+        ChangePasswordEmail().send(user)
 
-        logout(request)
         return redirect("account-user-login")
 
     return render(request, "account/pages/user/change_password.html", {"form": form})

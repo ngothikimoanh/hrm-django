@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import logging
 import os
 from pathlib import Path
 
@@ -20,12 +21,13 @@ from main.constants.database import SQLITE_PATH
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+logger = logging.getLogger(__name__)
+
 # Load environment variables
 DEFAULT_ENV_FILE = BASE_DIR / ".env"
 
 if not load_dotenv(DEFAULT_ENV_FILE):
-    raise FileNotFoundError(".env file not found in either root or docker directory.")
-
+    logger.warning(".env file not found, skipping...")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/

@@ -37,7 +37,7 @@ class EmailSMTPService(EmailService):
         msg = EmailMultiAlternatives(
             subject=self.subject,
             body=html_content,
-            from_email=settings.DEFAULT_FROM_EMAIL,
+            from_email=settings.FROM_EMAIL,
             to=to_emails,
             cc=cc_emails,
             bcc=bcc_email,
