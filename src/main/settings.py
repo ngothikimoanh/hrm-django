@@ -13,19 +13,25 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import os
 from pathlib import Path
 
-import environ
+from dotenv import load_dotenv
 
 from main.constants.database import SQLITE_PATH
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load environment variables
+DEFAULT_ENV_FILE = BASE_DIR / ".env"
+
+if not load_dotenv(DEFAULT_ENV_FILE):
+    raise FileNotFoundError(".env file not found in either root or docker directory.")
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-y_gv)a^1(-pp^n@l)h-i==8i#yptd_fdoku+56b3p@rrmwyo&m"
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -127,13 +133,10 @@ STATIC_URL = "static/"
 AUTH_USER_MODEL = "account.User"
 
 
-env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
-
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = env("AWS_SES_HOST")
-EMAIL_PORT = env.int("AWS_SES_PORT")
+EMAIL_HOST = os.environ["EMAIL_HOST"]
+EMAIL_PORT = os.environ["EMAIL_PORT"]
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = env("AWS_SES_USER")
-EMAIL_HOST_PASSWORD = env("AWS_SES_PASSWORD")
-DEFAULT_FROM_EMAIL = env("AWS_SES_FROM")
+EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
+FROM_EMAIL = os.environ["FROM_EMAIL"]

@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render
 
 from account.decorators.user import require_login
 from account.forms.user.change_password import ChangePasswordForm
-from account.views.mail.change_password import send_email_async
+from account.mail.change_password import ChangePasswordEmail
 
 
 @require_login
@@ -17,7 +17,8 @@ def change_password_view(request: HttpRequest):
     if request.method == HTTPMethod.POST and form.is_valid():
         user = form.save()
 
-        send_email_async(user)
+        send_email_service = ChangePasswordEmail()
+        send_email_service.send(user)
 
         logout(request)
         return redirect("account-user-login")
