@@ -10,23 +10,24 @@
 <div class="container mt-5 border p-4 rounded bg-body-tertiary" style="max-width: 30rem;">
   <form method="post">
     {% csrf_token %}
+
     <div class="mb-3">
       <label for="userRegisterInputEmail" class="form-label ">Email address</label>
       <input type="email" class="form-control" id="userRegisterInputEmail" name="email" value="{{ form.email.value|default_if_none:"" }}" required>
       {% include "error-field.html" with form=form name="email" %}
     </div>
+
     <div class="mb-4">
       <label for="userRegisterInputPassword" class="form-label">Password</label>
       <input type="password" class="form-control" id="userRegisterInputPassword" name="password" required>
-      <div class=" text-danger small">{{ form.password.errors }}</div>
+      {% include "error-field.html" with form=form name="password" %}
     </div>
+
     <div class="mb-4">
       <label for="userRegisterConfirmPassword" class="form-label">Confirm Password</label>
       <input type="password" class="form-control" id="userRegisterConfirmPassword" name="confirm_password" required>
     </div>
-    <div class="text-danger small">
-      {{ form.confirm_password.errors }}
-    </div>
+
     <button type="submit" class=" form-control btn btn-primary">Register</button>
   </form>
 </div>

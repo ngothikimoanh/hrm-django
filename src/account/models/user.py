@@ -4,9 +4,9 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import UserManager as AbstractUserManager
 from django.db import models
 
-from account.models.fields import PhoneNumberField
 from account.validators.user import validate_address
 from common.models import TimestampMixin, UUIDPrimaryMixin
+from common.models.fields import PhoneNumberField
 
 
 class UserManager(AbstractUserManager):
@@ -46,8 +46,8 @@ class User(AbstractUser, TimestampMixin, UUIDPrimaryMixin):
 
     address = models.CharField(max_length=255, validators=[validate_address], blank=True, null=True)
 
-    mid_name = models.CharField(max_length=150, blank=True, null=True)
-    nick_name = models.CharField(max_length=150, blank=True, null=True)
+    mid_name = models.CharField(max_length=255, blank=True, null=True)
+    nick_name = models.CharField(max_length=255, blank=True, null=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

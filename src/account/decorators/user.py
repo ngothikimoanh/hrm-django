@@ -21,16 +21,3 @@ def require_not_login(view_func):
         return view_func(request, *args, **kwargs)
 
     return wrapped_view
-
-
-def require_role(*roles):
-    def inner(view_func):
-        def wrapper(request: HttpRequest, *args, **kwargs):
-            if request.user.is_authenticated and request.user.role in roles:
-                return view_func(request, *args, **kwargs)
-            messages.warning(request, "You can not allow to access this page")
-            return redirect("home")
-
-        return wrapper
-
-    return inner

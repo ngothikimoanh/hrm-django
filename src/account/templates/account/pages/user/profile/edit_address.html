@@ -7,30 +7,18 @@
 {% endblock nav %}
 
 {% block main %}
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-4">
+<div class="container mt-5 shadow-sm border rounded p-4 bg-body-tertiary" style="max-width: 35rem;">
+  <h4 class="text-center mb-4">Update your address</h4>
+  <form method="post">
+    {% csrf_token %}
 
-      <div class="card shadow-sm">
-        <div class="card-body">
-
-          <h5 class="text-center mb-4">Address</h5>
-
-          <form method="post">
-            {% csrf_token %}
-
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="address" name="address" value="{{user.address|default_if_none:''}}">
-              {% include "error-field.html" with form=form name="address" %}
-              <label for="address"> Address</label>
-            </div>
-
-            <button type="submit" class=" form-control btn btn-primary">Save</button>
-
-          </form>
-        </div>
-      </div>
+    <div class="form-floating mb-4">
+      <input type="text" class="form-control" id="address" name="address" value="{{ user.address|default_if_none:'' }}">
+      {% include "error-field.html" with form=form name="address" %}
+      <label for="address">Address</label>
     </div>
-  </div>
+
+    <button type="submit" class="form-control btn btn-primary">Save</button>
+  </form>
 </div>
 {% endblock main %}

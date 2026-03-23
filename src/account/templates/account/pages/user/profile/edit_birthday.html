@@ -7,28 +7,18 @@
 {% endblock nav %}
 
 {% block main %}
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-4">
+<div class="container mt-5 shadow-sm border rounded p-4 bg-body-tertiary" style="max-width: 35rem;">
+  <h4 class="text-center mb-4">Update your birthday</h4>
+  <form method="post">
+    {% csrf_token %}
 
-      <div class="card shadow-sm">
-        <div class="card-body">
-
-          <h5 class="text-center mb-4">Birthday</h5>
-
-          <form method="post">
-            {% csrf_token %}
-
-            <div class="mb-3">
-              <label class="form-label">Birthday</label>
-              <input type="date" name="birthday" class="form-control" name="birthday" value="{{user.birthday|date:'Y-m-d'}}" required>
-              {% include "error-field.html" with form=form name="birthday" %}
-            </div>
-            <button type="submit" class=" form-control btn btn-primary">Save</button>
-          </form>
-        </div>
-      </div>
+    <div class="form-floating mb-4">
+      <input type="date" class="form-control" id="birthday" name="birthday" value="{{ user.birthday|date:'Y-m-d' }}">
+      {% include "error-field.html" with form=form name="birthday" %}
+      <label for="birthday">Birthday</label>
     </div>
-  </div>
+
+    <button type="submit" class="form-control btn btn-primary">Save</button>
+  </form>
 </div>
 {% endblock main %}

@@ -21,7 +21,11 @@
           <i class="fa-solid fa-camera me-3"></i>
           <strong>Profile Photo</strong>
         </div>
-        <div class="p-2 flex-shrink-1"><img src="{% static 'images/default_avartar.png' %}" alt="default_avatar" class="rounded-circle object-fit-cover" style="width:4rem; height:4rem;"></div>
+
+        <div class="p-2 flex-shrink-1">
+          <img src="{% static 'images/default_avartar.png' %}" alt="default_avatar" class="rounded-circle object-fit-cover" style="width:4rem; height:4rem;">
+        </div>
+
         <form method="post">
           <input type="file" class="d-none" name="avatar">
         </form>
@@ -30,12 +34,13 @@
 
     <li class="list-group-item list-group-item-action text-body text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-name' %}`">
       <div class="d-flex align-items-center">
-        <div>
-          <i class="fa-solid fa-id-card me-3"></i>
-        </div>
+        <div><i class="fa-solid fa-id-card me-3"></i></div>
         <div class="flex-grow-1">
           <h6>Name</h6>
-          <div> {{ user.first_name|display}} {{ user.mid_name|display}} {{ user.last_name|display }} <small>({{ user.nick_name|display }})</small></div>
+          <div>
+            {{ user.first_name|display}} {{ user.mid_name|display}} {{ user.last_name|display }}
+            {% if user.nick_name %}<small>({{ user.nick_name }})</small>{% endif %}
+          </div>
         </div>
     </li>
 
@@ -44,7 +49,7 @@
         <div><i class="fa-solid fa-user me-3"></i></div>
         <div class="flex-grow-1">
           <h6>Gender</h6>
-          <div>{{ user.gender|display }}</div>
+          <div>{{ user.get_gender_display|display }}</div>
         </div>
     </li>
 
