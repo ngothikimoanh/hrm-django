@@ -1,5 +1,8 @@
 django
-
 python-dotenv
 
+#ses
 boto3
+
+#testing
+pytest-django
