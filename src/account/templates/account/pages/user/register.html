@@ -13,7 +13,7 @@
 
     <div class="mb-3">
       <label for="userRegisterInputEmail" class="form-label ">Email address</label>
-      <input type="email" class="form-control" id="userRegisterInputEmail" name="email" value="{{ form.email.value|default_if_none:"" }}" required>
+      <input type="email" class="form-control" id="userRegisterInputEmail" name="email" value="{{ form.email.value|default_if_none:'' }}" required>
       {% include "error-field.html" with form=form name="email" %}
     </div>
 
