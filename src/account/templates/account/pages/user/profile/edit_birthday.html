@@ -12,10 +12,10 @@
   <form method="post">
     {% csrf_token %}
 
-    <div class="form-floating mb-4">
+    <div class="mb-4">
+      <label for="birthday" class="form-label">Birthday</label>
       <input type="date" class="form-control" id="birthday" name="birthday" value="{{ user.birthday|date:'Y-m-d' }}">
       {% include "error-field.html" with form=form name="birthday" %}
-      <label for="birthday">Birthday</label>
     </div>
 
     <button type="submit" class="form-control btn btn-primary">Save</button>

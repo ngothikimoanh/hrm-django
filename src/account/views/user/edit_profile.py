@@ -33,7 +33,8 @@ def edit_gender_view(request: HttpRequest):
 
 
 def edit_phone_number_view(request: HttpRequest):
-    form = EditPhoneNumberForm(request.POST or None, instance=request.user)
+    user = request.user
+    form = EditPhoneNumberForm(request.POST or None, instance=user)
     if request.method == HTTPMethod.POST and form.is_valid():
         form.save()
         return redirect("account-user-profile")
@@ -46,7 +47,8 @@ def edit_phone_number_view(request: HttpRequest):
 
 
 def edit_email_view(request: HttpRequest):
-    form = EditEmailForm(request.POST or None, instance=request.user)
+    user = request.user
+    form = EditEmailForm(request.POST or None, instance=user)
     if request.method == HTTPMethod.POST and form.is_valid():
         form.save()
         return redirect("account-user-profile")
