@@ -5,9 +5,12 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
 from django.forms import ValidationError
 
+from account.decorators.user import require_not_login
+
 User = get_user_model()
 
 
+@require_not_login
 class UserRegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput, validators=[validate_password])
 

@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
+from account.decorators.user import require_login
 from account.forms.user.profile import (
     EditAddressForm,
     EditBirthdayForm,
@@ -16,6 +17,7 @@ from account.forms.user.profile import (
 User = get_user_model()
 
 
+@require_login
 def edit_name_view(request: HttpRequest):
     form = EditNameForm(request.POST or None, instance=request.user)
     if request.method == HTTPMethod.POST and form.is_valid():
@@ -24,6 +26,7 @@ def edit_name_view(request: HttpRequest):
     return render(request, "account/pages/user/profile/edit_name.html", {"form": form})
 
 
+@require_login
 def edit_gender_view(request: HttpRequest):
     form = EditGenderForm(request.POST or None, instance=request.user)
     if request.method == HTTPMethod.POST and form.is_valid():
@@ -32,6 +35,7 @@ def edit_gender_view(request: HttpRequest):
     return render(request, "account/pages/user/profile/edit_gender.html", {"form": form})
 
 
+@require_login
 def edit_phone_number_view(request: HttpRequest):
     user = request.user
     form = EditPhoneNumberForm(request.POST or None, instance=user)
@@ -46,6 +50,7 @@ def edit_phone_number_view(request: HttpRequest):
     return render(request, "account/pages/user/profile/edit_phone_number.html", context)
 
 
+@require_login
 def edit_email_view(request: HttpRequest):
     user = request.user
     form = EditEmailForm(request.POST or None, instance=user)
@@ -60,6 +65,7 @@ def edit_email_view(request: HttpRequest):
     return render(request, "account/pages/user/profile/edit_email.html", context)
 
 
+@require_login
 def edit_birthday_view(request: HttpRequest):
     form = EditBirthdayForm(request.POST or None, instance=request.user)
     if request.method == HTTPMethod.POST and form.is_valid():
@@ -68,6 +74,7 @@ def edit_birthday_view(request: HttpRequest):
     return render(request, "account/pages/user/profile/edit_birthday.html", {"form": form})
 
 
+@require_login
 def edit_address_view(request: HttpRequest):
     form = EditAddressForm(request.POST or None, instance=request.user)
     if request.method == HTTPMethod.POST and form.is_valid():
