@@ -4,9 +4,11 @@ from django.contrib.auth import login
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
+from account.decorators.user import require_not_login
 from account.forms.user.register import UserRegisterForm
 
 
+@require_not_login
 def user_register(request: HttpRequest):
     form = UserRegisterForm(request.POST or None)
     if request.method == HTTPMethod.POST and form.is_valid():

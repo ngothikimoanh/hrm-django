@@ -1,5 +1,8 @@
 django
-
 python-dotenv
 
+#aws
 boto3
+
+#testing
+pytest-django
