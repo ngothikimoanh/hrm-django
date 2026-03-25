@@ -1,0 +1,25 @@
+<div style="
+    max-width: 600px;
+    margin: auto;
+    padding: 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: &quot;Segoe UI&quot;, Tahoma, Geneva, Verdana, sans-serif;
+  ">
+  <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 16px">OD Human Resources</div>
+  <div style="margin-bottom: 16px">Dear {{ user.email }},</div>
+  <div style="margin-bottom: 12px">We have received this email verification request to use the OD Human Resources Account system.</div>
+  <div style="margin-bottom: 12px">If you requested this verification, please go to the following URL to confirm that you are authorized to use this email address: </div>
+
+  <div style="margin-bottom: 40px">
+    If you did not perform this action, please contact our support team immediately.
+  </div>
+  <div style="text-align: center">
+    <a href="{% url 'account-home' %}" style="padding: 10px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; border: 1px solid">
+      Go to Home
+    </a>
+  </div>
+  <div style="margin-top: 24px; padding-top: 12px; border-top: 1px solid #e3e5e8; font-size: 12px; text-align: center">
+    © 2026 OD Human Resources. All rights reserved.
+  </div>
+</div>

@@ -17,5 +17,6 @@ def test_register_success(client, db):
 
     assert response.status_code == 302
 
-    user = User.objects.get(email="testuser@example.com")
+    user = User.objects.filter(email="testuser@example.com").first()
+    assert user is not None
     assert user.check_password("strongpassword123")
