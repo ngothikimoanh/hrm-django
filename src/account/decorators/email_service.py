@@ -1,6 +1,7 @@
 import uuid
 from datetime import timedelta
 
+from django.conf import settings
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.utils import timezone
@@ -19,7 +20,7 @@ def send_verify_email(view_func):
             and not request.user.email_verified
         ):
             token = uuid.uuid4()
-            expired_at = timezone.now() + timedelta(minutes=30)
+            expired_at = timezone.now() + timedelta(minutes=settings.EXPIRY_MINUTES)
 
             EmailVerificationToken.objects.update_or_create(
                 user=request.user,
@@ -30,7 +31,13 @@ def send_verify_email(view_func):
             verify_link = request.build_absolute_uri(path) + f"?token={token}"
 
             email_service = VerifyEmail()
-            html_content = email_service.generate_html({"user": request.user, "verify_link": verify_link})
+            html_content = email_service.generate_html(
+                {
+                    "user": request.user,
+                    "verify_link": verify_link,
+                    "expiry_minutes": settings.EMAIL_VERIFICATION_EXPIRY_MINUTES,
+                }
+            )
             email_service.send_mail(to_emails=[request.user.email], html_content=html_content)
 
         return response

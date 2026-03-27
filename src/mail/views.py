@@ -1,6 +1,6 @@
 import uuid
 
-from django.contrib import auth, messages
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.shortcuts import redirect
 from django.utils import timezone
@@ -47,8 +47,6 @@ def verify_email_view(request):
 
     record.is_used = True
     record.save(update_fields=["is_used"])
-
-    auth.login(request, user)
 
     messages.success(request, f"{user.email}! has been verified successfully!")
     return redirect("account-user-profile")
