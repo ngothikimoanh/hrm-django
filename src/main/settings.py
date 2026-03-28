@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 import logging
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -51,9 +52,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "common",
-    "account",
-    "mail",
+    "common",  # Common application, include common base functions, base models, ...
+    "account",  # Management account, update profile, authenticate
+    "mail",  # Sending email
 ]
 
 MIDDLEWARE = [
@@ -127,7 +128,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-EXPIRY_MINUTES = 30
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
@@ -138,6 +138,7 @@ STATIC_URL = "static/"
 AUTH_USER_MODEL = "account.User"
 
 
+# Email
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = os.environ["EMAIL_HOST"]
 EMAIL_PORT = os.environ["EMAIL_PORT"]
@@ -145,3 +146,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
 EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
 FROM_EMAIL = os.environ["FROM_EMAIL"]
+
+
+# Verify email
+EMAIL_VERIFY_EXP = timedelta(minutes=30)

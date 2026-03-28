@@ -9,12 +9,16 @@ from account.decorators.user import require_not_login
 from account.forms.user.register import UserRegisterForm
 
 
-@send_verify_email
 @require_not_login
+@send_verify_email
 def user_register(request: HttpRequest):
     form = UserRegisterForm(request.POST or None)
     if request.method == HTTPMethod.POST and form.is_valid():
         user = form.save()
         login(request, user)
-        return redirect("account-home")
+
+        response = redirect("account-home")
+        setattr(response, "user", user)
+        return response
+
     return render(request, "account/pages/user/register.html", {"form": form})

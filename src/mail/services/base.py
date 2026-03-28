@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any
 
+from django.http import HttpRequest
 from django.template.loader import render_to_string
 
 
@@ -8,8 +9,8 @@ class EmailService(ABC):
     template_name: str
     subject: str
 
-    def generate_html(self, context: dict[str, Any]):
-        return render_to_string(template_name=self.template_name, context=context)
+    def generate_html(self, context: dict[str, Any], request: HttpRequest | None = None):
+        return render_to_string(template_name=self.template_name, context=context, request=request)
 
     @abstractmethod
     def send_mail(
