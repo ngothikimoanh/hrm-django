@@ -6,7 +6,7 @@ from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.utils import timezone
 
-from mail.models import EmailVerificationToken
+from account.models.mails.verify_email import EmailVerificationToken
 from mail.services.templates.verify_email import VerifyEmail
 
 
@@ -14,11 +14,7 @@ def send_verify_email(view_func):
     def wrapped_view(request: HttpRequest, *args, **kwargs):
         response: HttpResponse = view_func(request, *args, **kwargs)
 
-        if (
-            isinstance(response, HttpResponseRedirect)
-            and request.user.is_authenticated
-            and not request.user.email_verified
-        ):
+        if isinstance(response, HttpResponseRedirect):
             token = uuid.uuid4()
             expired_at = timezone.now() + timedelta(minutes=settings.EXPIRY_MINUTES)
 
@@ -35,7 +31,7 @@ def send_verify_email(view_func):
                 {
                     "user": request.user,
                     "verify_link": verify_link,
-                    "expiry_minutes": settings.EMAIL_VERIFICATION_EXPIRY_MINUTES,
+                    "expiry_minutes": settings.EXPIRY_MINUTES,
                 }
             )
             email_service.send_mail(to_emails=[request.user.email], html_content=html_content)
