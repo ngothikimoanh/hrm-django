@@ -14,6 +14,7 @@ from account.views.user.edit_profile import (
 from account.views.user.login import user_login
 from account.views.user.profile import profile_view
 from account.views.user.register import user_register
+from account.views.user.verify_email import verify_email_view
 
 urlpatterns = [
     path("", home_view, name="account-home"),
@@ -30,4 +31,6 @@ urlpatterns = [
     path("users/profile/edit_email", edit_email_view, name="account-user-profile-edit-email"),
     path("users/profile/edit_birthday", edit_birthday_view, name="account-user-profile-edit-birthday"),
     path("users/profile/edit_address", edit_address_view, name="account-user-profile-edit-address"),
+    # send mail
+    path("verify_email", verify_email_view, name="verify-email"),
 ]

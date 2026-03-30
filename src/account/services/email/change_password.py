@@ -1,6 +1,4 @@
-from mail.services.smtp import EmailSMTPService
-
-EmailBaseClass = EmailSMTPService
+from account.services.email.base import EmailBaseClass
 
 
 class ChangePasswordEmail(EmailBaseClass):

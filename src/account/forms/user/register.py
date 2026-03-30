@@ -23,6 +23,8 @@ class UserRegisterForm(forms.ModelForm):
 
     @override
     def save(self):
-
-        user = User.objects.create_user(email=self.cleaned_data["email"], password=self.cleaned_data["password"])
+        user = User.objects.create_user(
+            email=self.cleaned_data["email"],
+            password=self.cleaned_data["password"],
+        )
         return user

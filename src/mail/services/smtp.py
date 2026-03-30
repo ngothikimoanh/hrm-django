@@ -1,9 +1,9 @@
 from typing import override
 
+from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 
 from mail.services.base import EmailService
-from main import settings
 
 
 class EmailSMTPService(EmailService):
