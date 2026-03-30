@@ -1,7 +1,5 @@
 from mail.services.smtp import EmailSMTPService
 
-EmailBaseClass = EmailSMTPService
-
 
 class VerifyEmail(EmailSMTPService):
     subject: str = "Email Address Verification Request"

@@ -14,7 +14,7 @@ from account.views.user.edit_profile import (
 from account.views.user.login import user_login
 from account.views.user.profile import profile_view
 from account.views.user.register import user_register
-from mail.views import verify_email_view
+from account.views.user.verify_email import verify_email_view
 
 urlpatterns = [
     path("", home_view, name="account-home"),
