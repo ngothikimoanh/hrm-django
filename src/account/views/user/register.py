@@ -4,8 +4,8 @@ from django.contrib.auth import login
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
-from account.decorators.email_service import send_verify_email
 from account.decorators.user import require_not_login
+from account.decorators.verify_email import send_verify_email
 from account.forms.user.register import UserRegisterForm
 
 
