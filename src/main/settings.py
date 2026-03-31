@@ -149,4 +149,4 @@ FROM_EMAIL = os.getenv("FROM_EMAIL")
 
 
 # Verify email
-EMAIL_VERIFY_EXP = timedelta(minutes=30)
+EMAIL_VERIFY_EXP = timedelta(minutes=5)
