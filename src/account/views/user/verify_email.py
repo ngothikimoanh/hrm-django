@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.http import HttpRequest, HttpResponseBadRequest
 from django.shortcuts import redirect
-from django.views.decorators.http import require_GET,require_POST
+from django.views.decorators.http import require_GET
 
 from account.models.verify_email import EmailVerifyOTP
 from account.services.email.verify_email import OTPVerifyEmail

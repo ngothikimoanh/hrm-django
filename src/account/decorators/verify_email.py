@@ -1,7 +1,7 @@
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.http import HttpRequest,HttpResponseRedirect
 
-from account.models.verify_email import EmailVerifyOTP, EmailVerifyToken
-from account.services.email.verify_email import LinkVerifyEmail, OTPVerifyEmail
+from account.models.verify_email import  EmailVerifyToken
+from account.services.email.verify_email import LinkVerifyEmail
 
 
 def send_link_verify_email(view_func):
