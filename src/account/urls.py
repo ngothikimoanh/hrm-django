@@ -14,7 +14,7 @@ from account.views.user.edit_profile import (
 from account.views.user.login import user_login
 from account.views.user.profile import profile_view
 from account.views.user.register import user_register
-from account.views.user.verify_email import verify_email_view
+from account.views.user.verify_email import otp_view, verify_link_email_view, verify_otp_email_view
 
 urlpatterns = [
     path("", home_view, name="account-home"),
@@ -32,5 +32,7 @@ urlpatterns = [
     path("users/profile/edit_birthday", edit_birthday_view, name="account-user-profile-edit-birthday"),
     path("users/profile/edit_address", edit_address_view, name="account-user-profile-edit-address"),
     # send mail
-    path("verify_email", verify_email_view, name="verify-email"),
+    path("link_verify_email", verify_link_email_view, name="link-verify-email"),
+    path("otp", otp_view, name="otp"),
+    path("otp_verify_email", verify_otp_email_view, name="otp_verify_email"),
 ]

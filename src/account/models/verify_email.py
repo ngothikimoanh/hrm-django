@@ -17,6 +17,9 @@ def _generate_exp_time():
 def _generate_secret() -> str:
     return secrets.token_urlsafe(32)
 
+def generate_otp():
+    return ''.join(str(secrets.randbelow(10)) for _ in range(6))
+
 
 class EmailVerifyToken(TimestampMixin):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -25,3 +28,13 @@ class EmailVerifyToken(TimestampMixin):
 
     class Meta:
         db_table = "email_verify_tokens"
+
+
+
+class EmailVerifyOTP(TimestampMixin):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    otp = models.CharField(max_length=6, default=generate_otp)
+    expired_at = models.DateTimeField(default=_generate_exp_time)
+
+    class Meta:
+        db_table = "email_verify_otp"

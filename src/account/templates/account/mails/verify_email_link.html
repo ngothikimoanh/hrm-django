@@ -1,26 +1,42 @@
 {% load display %}
 
-<div style="
+<div
+  style="
     max-width: 600px;
     margin: auto;
     padding: 24px;
     border-radius: 8px;
     font-size: 16px;
     font-family: &quot;Segoe UI&quot;, Tahoma, Geneva, Verdana, sans-serif;
-  ">
+  "
+>
   <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 16px">OD Human Resources</div>
   <div style="margin-bottom: 16px">Dear {{ email_verify_token.user.email }},</div>
   <div style="margin-bottom: 12px">
     <p>We have received a request to authorize this email address for use OD Human Resources Account.</p>
-    <p>If you requested this verification, please go to the following URL to confirm that you are authorized to use this email address:</p>
-    <b><a href="{{ request.scheme }}://{{ request.get_host }}{% url 'verify-email' %}?token={{ email_verify_token.token }}">Click here to verify your email</a></b>
-    <p>Your request will not be processed unless you confirm the address using this URL. This link will be expired at {{ email_verify_token.expired_at|display }}.</p>
+    <p>
+      If you requested this verification, please go to the following URL to confirm that you are authorized to use this
+      email address:
+    </p>
+    <b
+      ><a
+        href="{{ request.scheme }}://{{ request.get_host }}{% url 'link-verify-email' %}?token={{ email_verify_token.token }}"
+        >Click here to verify your email</a
+      ></b
+    >
+    <p>
+      Your request will not be processed unless you confirm the address using this URL. This link will be expired at {{
+      email_verify_token.expired_at|display }}.
+    </p>
   </div>
   <div style="margin-bottom: 40px">
     If you did not request to verify this email address, do not click on the link. Please contact us instead.
   </div>
   <div style="text-align: center">
-    <a href="{{ request.scheme }}://{{ request.get_host }}{% url 'account-home' %}" style="padding: 10px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; border: 1px solid">
+    <a
+      href="{{ request.scheme }}://{{ request.get_host }}{% url 'account-home' %}"
+      style="padding: 10px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; border: 1px solid"
+    >
       Go to Home
     </a>
   </div>
