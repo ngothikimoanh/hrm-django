@@ -7,6 +7,7 @@ from django.shortcuts import redirect, render
 from account.decorators.user import require_login
 from account.forms.user.profile import (
     EditAddressForm,
+    EditAvatarForm,
     EditBirthdayForm,
     EditEmailForm,
     EditGenderForm,
@@ -15,6 +16,20 @@ from account.forms.user.profile import (
 )
 
 User = get_user_model()
+
+
+@require_login
+def edit_avatar_view(request: HttpRequest):
+    form = EditAvatarForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=request.user,
+    )
+    if request.method == HTTPMethod.POST and form.is_valid():
+        form.save()
+        return redirect("account-user-profile")
+
+    return render(request, "account/pages/user/profile/edit_avatar.html", {"form": form})
 
 
 @require_login

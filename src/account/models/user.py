@@ -34,6 +34,7 @@ class User(AbstractUser, TimestampMixin, UUIDPrimaryMixin):
         MALE = "male"
         FEMALE = "female"
 
+    avatar = models.ImageField(upload_to="profile/", blank=True, null=True)
     email = models.EmailField(unique=True)
     email_verified = models.BooleanField(default=False)
 

@@ -15,7 +15,7 @@
   <h4 class="text-center mb-4">Personal Information</h4>
 
   <ul class="list-group">
-    <li class="list-group-item py-4">
+    <li class="list-group-item list-group-item-action text-body text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-avatar' %}`">
       <label class="d-flex align-items-center justify-content-between ">
         <div class="d-flex align-items-center p-2 w-100">
           <i class="fa-solid fa-camera me-3"></i>
@@ -23,13 +23,8 @@
         </div>
 
         <div class="p-2 flex-shrink-1">
-          <img src="{% static 'images/default_avartar.png' %}" alt="default_avatar" class="rounded-circle object-fit-cover" style="width:4rem; height:4rem;">
+          <img src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'images/default_avatar.png' %}{% endif %}" alt="avatar" class="rounded-circle object-fit-cover" style="width:4rem; height:4rem;">
         </div>
-
-        <form method="post">
-          <input type="file" class="d-none" name="avatar">
-        </form>
-      </label>
     </li>
 
     <li class="list-group-item list-group-item-action text-body text-body py-4" onclick="window.location=`{% url 'account-user-profile-edit-name' %}`">

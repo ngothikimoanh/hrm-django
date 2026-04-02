@@ -1,0 +1,27 @@
+{% extends "account/base.html" %}
+
+{% load static %}
+
+{% block title %}Edit Profile{% endblock title %}
+
+{% block nav %}
+{% include "account/nav.html" with path="account-user-profile" %}
+{% endblock nav %}
+
+{% block main %}
+<div class="container mt-5 shadow-sm border rounded p-4 bg-body-tertiary" style="max-width: 35rem;">
+  <h4 class="text-center mb-4">Update your avatar</h4>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <img class="rounded mx-auto d-block mb-3" src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'images/default_avatar.png' %}{% endif %}" alt="avatar" style="width:15rem; height:15rem>
+
+    <p>
+      <label for="id_avatar">Avatar:</label>
+      <input type="file" name="avatar">
+    </p>
+
+    <button class="form-control btn btn-primary" type="submit">Upload</button>
+  </form>
+</div>
+{% endblock main %}
