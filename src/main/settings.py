@@ -132,7 +132,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = "static/"
 
 # Authentication
 AUTH_USER_MODEL = "account.User"
@@ -150,3 +149,10 @@ FROM_EMAIL = os.getenv("FROM_EMAIL")
 
 # Verify email
 EMAIL_VERIFY_EXP = timedelta(minutes=5)
+
+# Image
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR.parent / "media"
+
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [BASE_DIR.parent / "static"]

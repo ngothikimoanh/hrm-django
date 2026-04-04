@@ -5,6 +5,7 @@ from account.views.home import home_view
 from account.views.user.change_password_view import change_password_view
 from account.views.user.edit_profile import (
     edit_address_view,
+    edit_avatar_view,
     edit_birthday_view,
     edit_email_view,
     edit_gender_view,
@@ -25,6 +26,7 @@ urlpatterns = [
     path("users/profile", profile_view, name="account-user-profile"),
     path("users/change_password", change_password_view, name="account-user-change_password"),
     # Edit profile
+    path("users/profile/edit_avatar", edit_avatar_view, name="account-user-profile-edit-avatar"),
     path("users/profile/edit_name", edit_name_view, name="account-user-profile-edit-name"),
     path("users/profile/edit_gender", edit_gender_view, name="account-user-profile-edit-gender"),
     path("users/profile/edit_phone_number", edit_phone_number_view, name="account-user-profile-edit-phone_number"),
