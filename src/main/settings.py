@@ -17,16 +17,13 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from main.constants.database import SQLITE_PATH
-from main.constants.environment import ENV_FILE
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 logger = logging.getLogger(__name__)
 
 # Load environment variables
-DEFAULT_ENV_FILE = BASE_DIR / ENV_FILE
+DEFAULT_ENV_FILE = BASE_DIR.parent / ".env"
 
 if not load_dotenv(DEFAULT_ENV_FILE):
     logger.warning(".env file not found, skipping...")
@@ -93,7 +90,7 @@ WSGI_APPLICATION = "main.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / SQLITE_PATH,
+        "NAME": BASE_DIR.parent / "db.sqlite3",
     }
 }
 
@@ -150,9 +147,10 @@ FROM_EMAIL = os.getenv("FROM_EMAIL")
 # Verify email
 EMAIL_VERIFY_EXP = timedelta(minutes=5)
 
+
 # Image
 MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR.parent / "media"
+MEDIA_ROOT = BASE_DIR.parent / ".media"
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR.parent / "static"]
+STATICFILES_DIRS = [BASE_DIR.parent / ".static"]
