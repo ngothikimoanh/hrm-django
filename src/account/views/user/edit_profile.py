@@ -1,5 +1,6 @@
 from http import HTTPMethod
 
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
@@ -20,13 +21,10 @@ User = get_user_model()
 
 @require_login
 def edit_avatar_view(request: HttpRequest):
-    form = EditAvatarForm(
-        request.POST or None,
-        request.FILES or None,
-        instance=request.user,
-    )
+    form = EditAvatarForm(request.POST or None, request.FILES or None, instance=request.user)
     if request.method == HTTPMethod.POST and form.is_valid():
         form.save()
+        messages.success(request, "Update avatar successfully")
         return redirect("account-user-profile")
 
     return render(request, "account/pages/user/profile/edit_avatar.html", {"form": form})
