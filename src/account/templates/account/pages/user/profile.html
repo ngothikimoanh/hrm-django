@@ -23,7 +23,7 @@
         </div>
 
         <div class="p-2 flex-shrink-1">
-          <img src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'images/default_avatar.png' %}{% endif %}" alt="avatar" class="rounded-circle object-fit-cover" style="width:4rem; height:4rem;">
+          <img class="rounded-circle object-fit-cover" src=" {{ user.avatar.url }}" onerror="this.src='/static/images/default_avatar.png'" alt="avatar" style="width:4rem; height:4rem;">
         </div>
     </li>
 

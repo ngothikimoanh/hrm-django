@@ -14,12 +14,12 @@
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
-    <img class="rounded mx-auto d-block mb-3" src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'images/default_avatar.png' %}{% endif %}" alt="avatar" style="width:15rem; height:15rem>
+    <img class="rounded mx-auto d-block mb-3" src="{{ user.avatar.url }}" onerror="this.src='/static/images/default_avatar.png'" alt="avatar" style="width:15rem; height:15rem">
 
-    <p>
-      <label for="id_avatar">Avatar:</label>
-      <input type="file" name="avatar">
-    </p>
+    <div class=" mb-3">
+      <label class="mb-3 fw-bold" for="avatar">Upload</label>
+      <input type="file" class="form-control" id="avatar" name="avatar">
+    </div>
 
     <button class="form-control btn btn-primary" type="submit">Upload</button>
   </form>
