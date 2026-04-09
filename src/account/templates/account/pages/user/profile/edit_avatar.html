@@ -14,7 +14,7 @@
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
-    <img class="rounded mx-auto d-block mb-3" src="{{ user.avatar.url }}" onerror="this.src='/static/images/default_avatar.png'" alt="avatar" style="width:15rem; height:15rem">
+    <img class="rounded mx-auto d-block mb-3" src="{% if user.avatar and user.avatar.name %}{{ user.avatar.url }}{% else %}/static/images/default_avatar.png{% endif %}" onerror="this.src='/static/images/default_avatar.png'" style="width:15rem; height:15rem">
 
     <div class=" mb-3">
       <label class="mb-3 fw-bold" for="avatar">Upload</label>

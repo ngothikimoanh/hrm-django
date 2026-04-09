@@ -1,4 +1,3 @@
-import time
 from typing import Any
 
 from django.contrib.auth.models import AbstractUser
@@ -32,7 +31,7 @@ class UserManager(AbstractUserManager):
 
 def upload_avatar(instance, filename):
     ext = filename.split(".")[-1]
-    return f"avatars/{instance.id}_{int(time.time())}.{ext}"
+    return f"avatars/avatar_{instance.id}.{ext}"
 
 
 class User(AbstractUser, TimestampMixin, UUIDPrimaryMixin):
