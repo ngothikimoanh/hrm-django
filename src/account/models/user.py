@@ -29,12 +29,17 @@ class UserManager(AbstractUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
+def upload_avatar(instance, filename):
+    ext = filename.split(".")[-1]
+    return f"avatars/avatar_{instance.id}.{ext}"
+
+
 class User(AbstractUser, TimestampMixin, UUIDPrimaryMixin):
     class Gender(models.TextChoices):
         MALE = "male"
         FEMALE = "female"
 
-    avatar = models.ImageField(upload_to="profile/", blank=True, null=True)
+    avatar = models.ImageField(upload_to=upload_avatar, blank=True, null=True)
     email = models.EmailField(unique=True)
     email_verified = models.BooleanField(default=False)
 

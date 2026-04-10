@@ -154,3 +154,6 @@ MEDIA_ROOT = BASE_DIR.parent / ".media"
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR.parent / ".static"]
+
+[dir.mkdir(parents=True, exist_ok=True) for dir in STATICFILES_DIRS]
+MEDIA_ROOT.mkdir(parents=True, exist_ok=True)
