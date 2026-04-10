@@ -7,15 +7,10 @@ User = get_user_model()
 
 @receiver(pre_save, sender=User)
 def store_old_avatar(sender, instance, **kwargs):
-    if not instance.id:
-        instance._old_avatar = None
-        return
 
-    try:
-        old_user = sender.objects.get(id=instance.id)
-        instance._old_avatar = old_user.avatar
-    except sender.DoesNotExist:
-        instance._old_avatar = None
+    old_user = sender.objects.filter(id=instance.id).only("avatar").first()
+
+    instance._old_avatar = old_user.avatar if old_user else None
 
 
 @receiver(post_save, sender=User)
