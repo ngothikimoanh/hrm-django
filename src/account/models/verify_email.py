@@ -17,8 +17,9 @@ def _generate_exp_time():
 def _generate_secret() -> str:
     return secrets.token_urlsafe(32)
 
+
 def generate_otp():
-    return ''.join(str(secrets.randbelow(10)) for _ in range(6))
+    return "".join(str(secrets.randbelow(10)) for _ in range(6))
 
 
 class EmailVerifyToken(TimestampMixin):
@@ -28,7 +29,6 @@ class EmailVerifyToken(TimestampMixin):
 
     class Meta:
         db_table = "email_verify_tokens"
-
 
 
 class EmailVerifyOTP(TimestampMixin):

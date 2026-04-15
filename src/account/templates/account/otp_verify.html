@@ -9,7 +9,7 @@
 {% block main %}
 <div class="container mt-5 shadow-sm border rounded p-4 bg-body-tertiary" style="max-width: 35rem">
   <h4 class="text-center mb-4">Update your email</h4>
-  <form method="post">
+  <form method="post" action="{% url 'otp_verify' %}">
     {% csrf_token %}
 
     <div class="mb-3">
@@ -17,12 +17,18 @@
       <input type="text" class="form-control" id="OTPInput" name="otp">
     </div>
 
+    <div class="mb-3 text-end">
+      <small>
+        <a href="{% url 'resend_otp' %}" class="text-decoration-none">Resend</a>
+      </small>
+    </div>
+
     <div class="mb-3">
       {% if email_verify_otp %}
       <p><b>This otp will be expired at {{ email_verify_otp.expired_at|display }}</b></p>
       {% endif %}
     </div>
-      <button class="btn btn-primary" type="submit">Submit</button>
+    <button class="btn btn-primary" type="submit">Submit</button>
   </form>
 </div>
 
