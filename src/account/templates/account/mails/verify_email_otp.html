@@ -20,8 +20,7 @@
     </p>
     <b>{{email_verify_otp.otp}}</b>
     <p>
-      Your request will not be processed unless you confirm the address using this URL. This otp will be expired at {{
-      email_verify_otp.expired_at|display }}.
+      Your request will not be processed unless you confirm the address using this OTP. This otp will be expired at {{ email_verify_otp.expired_at|date:"H:i d/m/Y" }}.
     </p>
   </div>
   <div style="margin-bottom: 40px">If you did not request to verify this email address. Please contact us instead.</div>

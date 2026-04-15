@@ -28,7 +28,7 @@
     <div class="mb-3 text-end">
       <small>
         {% if email_verified is True %} Email is verified {% else %}
-        <a href="{% url 'otp' %}" class="text-decoration-none">Click here to verify Email</a>
+        <a href="{% url 'send_otp' %}" class="text-decoration-none">Click here to verify Email</a>
         {% endif %}
       </small>
     </div>

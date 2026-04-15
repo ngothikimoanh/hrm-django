@@ -1,7 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model
-from django.http import HttpRequest, HttpResponseBadRequest
+from django.http import HttpRequest
 from django.shortcuts import redirect, render
+from django.utils import timezone
 
 from account.models.verify_email import EmailVerifyOTP
 from account.services.email.verify_email import OTPVerifyEmail
@@ -24,27 +25,48 @@ User = get_user_model()
 
 
 def send_otp_view(request: HttpRequest):
-    email_verify_otp = EmailVerifyOTP.objects.create(user=request.user)
-    email_service = OTPVerifyEmail()
-    html_content = email_service.generate_html({"email_verify_otp": email_verify_otp}, request=request)
-    email_service.send_mail(to_emails=[request.user.email], html_content=html_content)
-
+    service = OTPVerifyEmail()
+    service.create_and_send(request.user, request)
     return render(request, "account/otp_verify.html")
 
 
 def verify_otp_email_view(request: HttpRequest):
+    if request.method != "POST":
+        return render(request, "account/otp_verify.html")
+
     service = OTPVerifier(user=request.user, otp=request.POST.get("otp"))
 
     try:
         service.clean()
     except ValueError as e:
-        return HttpResponseBadRequest(str(e))
+        messages.error(request, str(e))
+        return redirect("otp_verify")
 
     if not service.is_valid():
-        return HttpResponseBadRequest("OTP invalid")
+        messages.error(request, "OTP invalid")
+        return redirect("otp_verify")
 
     if not service.verify():
-        return HttpResponseBadRequest("Verify fail")
+        messages.error(request, "Verify failed")
+        return redirect("otp_verify")
 
     messages.success(request, "Email verified successfully!")
     return redirect("account-home")
+
+
+def resend_otp_view(request):
+    user = request.user
+    now = timezone.now()
+
+    otp_obj = EmailVerifyOTP.objects.filter(user=user).first()
+
+    if otp_obj and otp_obj.expired_at > now:
+        remaining = int((otp_obj.expired_at - now).total_seconds())
+
+        messages.error(request, f"Your current OTP is still valid for {remaining} seconds.")
+        return redirect("otp_verify")
+
+    OTPVerifyEmail().create_and_send(user, request)
+
+    messages.success(request, "A new OTP has been sent successfully.")
+    return redirect("otp_verify")
