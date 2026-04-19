@@ -1,10 +1,13 @@
-from account.models.verify_email import EmailVerifyOTP
+from account.models.verify_email import EmailVerifyOTP, EmailVerifyToken
 from mail.services.smtp import EmailSMTPService
 
 
 class LinkVerifyEmail(EmailSMTPService):
     subject: str = "Email Address Verification Request"
     template_name: str = "account/mails/verify_email_link.html"
+
+    def create_token(self, user):
+        return EmailVerifyToken.objects.create(user=user)
 
 
 class OTPVerifyEmail(EmailSMTPService):

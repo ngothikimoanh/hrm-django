@@ -1,27 +1,29 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponseBadRequest
 from django.shortcuts import redirect, render
 from django.utils import timezone
+from django.views.decorators.http import require_GET
 
 from account.models.verify_email import EmailVerifyOTP
 from account.services.email.verify_email import OTPVerifyEmail
+from account.services.email_verify.link_verify import LinkVerifier
 from account.services.email_verify.otp_verify import OTPVerifier
 
 User = get_user_model()
 
 
-# @require_GET
-# def verify_link_email_view(request: HttpRequest):
-#     service = LinkVerifier(token=request.GET["token"])
-#     service.clean()
+@require_GET
+def verify_link_email_view(request: HttpRequest):
+    service = LinkVerifier(token=request.GET["token"])
+    service.clean()
 
-#     if service.is_valid():
-#         service.save()
-#         messages.success(request, "Email verified successfully!")
-#         return redirect("account-home")
+    if service.is_valid():
+        service.save()
+        messages.success(request, "Email verified successfully!")
+        return redirect("account-home")
 
-#     return HttpResponseBadRequest("Invalid token")
+    return HttpResponseBadRequest("Invalid token")
 
 
 def send_otp_view(request: HttpRequest):
